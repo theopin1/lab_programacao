@@ -22,3 +22,28 @@ printf("O sistema não é escalonavel");
 
 return 0;
 }
+
+// Jeito do prof:
+#include <stdio.h>
+
+#define N 3
+
+int main(){
+
+int c, p;
+float tt; 
+
+for (int i=0; i< N; i++){
+  printf("Entre com o tempo de CPU:%d\n ",i+1);
+  scanf("%d",&p);
+
+  printf("Entre com o periodo:%d\n ",i+1);
+  scanf("%d",&p);
+  
+  tt += ((float)c)/ p;
+}
+
+(tt>1)? puts("O sistema não é escalonavel"):puts("O sistema é escalonavel");
+
+return 0;
+}
