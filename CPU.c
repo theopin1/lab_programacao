@@ -10,7 +10,7 @@ scanf("%f%f%f", &x, &y, &z);
 printf("Escreva os tempos de CPU dos tres eventos: ");
 scanf("%f%f%f", &a, &b, &c); 
 
-t = (a/x) + (b/y) + (c/z);
+t = (a(float)/(float)x) + (b(float)/(float)y) + (c(float)/(float)z);
 
 if (t <= 1)
 
