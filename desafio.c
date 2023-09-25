@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 int main(){
 
-   int option;
+   int option,numarm;
    unsigned char n = 0;
    int x = 1;
    unsigned char r;
@@ -14,13 +15,21 @@ int main(){
    {
    
    case 1:
-    r = rand()%8;
-    printf("%hhu ", n | (1 << r));
-    break;
+     if (n == 255){
+         printf("Todos os armários estão ocupados");
+     }
+     else{
+     do{ 
+        r = rand()%8;
+     } while (n & (1 << r));
+     printf("%d ",n |= (1 << r));
+    }
+     break;
    
    case 2:
-    r = rand()%8;
-    printf("%hhu ", n & (1 << r));
+    printf("Digite o número do armário a ser liberado: ");
+    scanf("%d",&numarm);
+    printf("%hhu ", n &= ~(1 << (numarm - 1)));
     break;
    
    case 3:
