@@ -19,8 +19,11 @@ void inserir(int, int, const char *, struct Node *);
 
 void gerarVet(char *);
 
+void ocuparMemoria(struct Node *, int numero);
+
 int main(){
 	int tm = 1;
+	int n;
 	
 	struct Node h;
 
@@ -49,6 +52,13 @@ int main(){
 	}
 
 	imprimir(&h);
+
+	printf("Digite a quantidade de memória que deseja ocupar: ");
+    scanf("%d", &n);
+
+	ocuparMemoria(&h, n);
+
+    imprimir(&h);
 
 	return 0;
 }
@@ -90,5 +100,18 @@ void gerarVet(char *r){
    
    printf("%d",r[i]);
    }
+
+}
+
+void ocuparMemoria(struct Node *p, int numero){
+	struct Node *k = p ;
+	while (k != NULL) {
+        if (numero <= k->x) {
+            k->x = numero;
+
+        
+		}
+        k = k->prox;
+    }
 
 }
