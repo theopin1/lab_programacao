@@ -19,8 +19,6 @@ void inserir(int, int, const char *, struct Node *);
 
 void gerarVet(char *);
 
-void ocuparMemoria(struct Node *, int numero);
-
 int main(){
 	int tm = 1;
 	int n;
@@ -42,10 +40,10 @@ int main(){
 			tm++;
 			 
 		} else if (ram[i - 1] == 1) {
-			 inserir(tm, (i - 1) - (tm - 1), "L", &h);
+			 inserir(tm, (i - 1) - (tm - 1), "O", &h);
             tm = 1;
         } else if (ram[i - 1] == 0) {
-			 inserir(tm, (i - 1) - (tm - 1), "O", &h);
+			 inserir(tm, (i - 1) - (tm - 1), "L", &h);
             tm = 1;
         }
 
@@ -53,12 +51,46 @@ int main(){
 
 	imprimir(&h);
 
-	printf("Digite a quantidade de memória que deseja ocupar: ");
-    scanf("%d", &n);
+	do {
+        printf("\nEscolha uma operacao:\n");
+        printf("1. Ocupar Memoria\n");
+        printf("0. Sair\n");
 
-	ocuparMemoria(&h, n);
+        int pu;
+        scanf("%d", &pu);
 
-    imprimir(&h);
+		switch(pu){
+          case 0: 
+		  	printf("Saindo do programa.\n");
+            exit(1);
+            break;
+		  case 1:
+                printf("Digite a quantidade de memória que deseja ocupar: ");
+                scanf("%d", &n);
+
+                // Ocupar memória conforme pedido do usuario
+                struct Node *k = &h;
+                while (k != NULL) {
+                    if (n < k->x && strcmp(k->c, "L") == 0) {
+                        inserir(k->x - n, k->y + n, "L", &h);
+                        k->x = n;
+                        k->c = "O";
+                    } else if(n == k->x && strcmp(k->c, "L") == 0){
+                        k->c = "O";
+                    } else if (n > k->x && strcmp(k->c, "L") == 0){
+                        printf("Memória insuficiente\n");
+                        exit(1);
+                    }
+                    k = k->prox;
+                    imprimir(&h);
+                }
+                break;
+
+            default: 
+                printf("Escolha invalida. Tente novamente.\n");
+        }
+
+    } while (h.prox != NULL);
 
 	return 0;
 }
@@ -103,15 +135,3 @@ void gerarVet(char *r){
 
 }
 
-void ocuparMemoria(struct Node *p, int numero){
-	struct Node *k = p ;
-	while (k != NULL) {
-        if (numero <= k->x) {
-            k->x = numero;
-
-        
-		}
-        k = k->prox;
-    }
-
-}
